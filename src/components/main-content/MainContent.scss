@@ -1,0 +1,10 @@
+@import "../../Style/Colors";
+
+.main-content{
+    flex: 3;
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 50px;
+    background-color: $bg-color;
+
+}

@@ -1,0 +1,10 @@
+//profile
+//pw channge
+//transfer money 
+// view movements
+// ver saldos, movimientos, fechas, filtros para moviemients....
+// pagos de servicios, agua, luz, telefono
+// graficos para reportes, gastos, ingresos
+// categorizar moviemientos: servicios, compras, tranferencias.
+// JWT security
+// api banco central - SOPA - XML --*opcional

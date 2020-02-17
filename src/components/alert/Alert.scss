@@ -1,0 +1,57 @@
+.alert-bar {
+  position: fixed;
+  height: 50px;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  z-index: 3;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.8s;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    & > * {
+      padding: 10px;
+    }
+
+    // &--p {
+    // }
+
+    &--button {
+      justify-self: flex-end;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 16px;
+      transition: 0.8s;
+    }
+
+    &:hover .alert-bar__content--button {
+      font-size: 20px;
+      // color: #ff7675;
+    }
+  }
+}
+
+.error {
+  background-color: #ff7675;
+}
+
+.success {
+  background-color: #badc58;
+  border-color: #6ab04c;
+}
+
+.warning {
+  background-color: #f6e58d;
+}

@@ -1,0 +1,30 @@
+.button-shape {
+  width: 145px;
+  color: #fff;
+  padding: 20px;
+  margin: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.error {
+  background-color: #ff7675;
+}
+
+.success {
+  background-color: #badc58;
+  border-color: #6ab04c;
+}
+
+.warning {
+  background-color: #f6e58d;
+}
+
+.dark {
+  color: #fff;
+  background-color: #3d3d3d;
+}

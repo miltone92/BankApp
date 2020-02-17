@@ -1,0 +1,41 @@
+.score-board {
+  width: 300px;
+  display: flex;
+  // align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+
+  border-radius: 5px;
+  flex-direction: column;
+  // box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.1);
+  // box-shadow: 8px 0 rgba(0, 0, 0, 0.2);
+
+  &__header {
+    color: #343a40;
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  &__detail {
+    color: #6a7580;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+.error {
+  background-color: #ff7675;
+}
+
+.success {
+  background-color: #badc58;
+  border-color: #6ab04c;
+}
+
+.warning {
+  background-color: #f6e58d;
+}
+
+.empty {
+}

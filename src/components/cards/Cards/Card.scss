@@ -1,0 +1,53 @@
+.card {
+  background-color: #f5f6fa;
+  border-color: #dcdde1;
+  border-radius: 5px;
+  min-height: 250px;
+  max-width: 250px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 5px;
+  position: relative;
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: 0.5s ease;
+    background-color: #0c140e;
+    border-radius: 5px;
+    overflow-y: auto;
+  }
+
+  &:hover .card__overlay {
+    opacity: 0.7;
+  }
+
+  &__overlay-text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+  }
+
+  &__image {
+    height: 150px;
+    width: 250px;
+    background-color: #78e08f;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    align-self: flex-start;
+  }
+}

@@ -1,0 +1,38 @@
+@import "../../../Style/Colors.scss";
+
+
+//  
+
+.link {
+  padding: 10px 10px 10px 30px;
+  text-decoration: none;
+  font-size: 14px;
+  color: $main-text;
+  transition: 0.3s;
+  position: relative;
+  display: block;
+
+  &__hidden{
+    display: none;
+  }
+
+  &__active:before{
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    background: $flare-color;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+  
+  }
+
+}
+
+.link:hover {
+  color: $flare-color;
+  background-color: $base-hover;
+
+}
+

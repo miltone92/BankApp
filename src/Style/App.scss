@@ -1,0 +1,98 @@
+
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100%;
+  color: #474747;
+  margin: 0;
+  background-color: #ecf0f1;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  overflow-y: hidden;
+}
+
+.app-container {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+@keyframes bounce {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.bounce {
+  animation: bounce 1.2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.regular-flex{
+display: flex; 
+
+}
+
+.center-children {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 5px;
+
+}
+
+.left-children {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.rigth-children{
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+
+
+@media (max-width: 992px) {
+  .regular-flex{
+    display: flex; 
+    flex-wrap: wrap;
+    }
+
+    .rigth-children{
+      display: flex;
+      justify-content: flex-end;
+      text-align: right;
+      flex-wrap: wrap-reverse;
+    
+    }
+
+    .left-children {
+      display: flex;
+      justify-content: flex-start;
+      text-align: left;
+      flex-wrap: wrap;
+    }
+}

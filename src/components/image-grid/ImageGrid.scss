@@ -1,0 +1,40 @@
+/**********
+CSS GRID
+***********/
+
+.image-grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  // max-width: 90%;
+  height: auto;
+  // margin: 0 auto;
+  // align-self: center;
+  padding-top: 10px;
+
+  &__item {
+    display: flex;
+    background-color: #c4e538;
+
+    & img {
+      width: 100%;
+      margin: auto;
+    }
+  }
+}
+
+.horizontal {
+  grid-column: span 2;
+}
+
+.vertical {
+  grid-row: span 2;
+}
+
+@media (max-width: 992px) {
+  .image-grid {
+    max-width: 100% !important;
+  }
+
+
+}
