@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './Style/App.scss';
+import './style/App.scss';
 
 
 //Dependencies

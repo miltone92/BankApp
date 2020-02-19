@@ -1,0 +1,22 @@
+@import "../../../Style/Colors.scss";
+
+.account-container{
+background-color: $base-color;
+border-radius: 5px;
+
+&__detail{
+    margin: 4px 0px;
+}
+
+&__attribute{
+    // text-transform: uppercase;
+    font-weight: 700;
+}
+
+&__balance{
+    font-weight: 700;
+    text-align: right;
+    text-decoration: underline;
+    text-decoration-color: $flare-color;
+}
+}

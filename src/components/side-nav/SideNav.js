@@ -5,8 +5,6 @@ const mediaQueryLimit = window.matchMedia("(max-width: 992px)");
 
 export const SideNav = (props) => {
 
-
-
   const [sidenav, setSidenav] = useState({
     visible: true,
   })
@@ -17,26 +15,28 @@ export const SideNav = (props) => {
 
 
   let highlightSectionLink = () => {
+
     let navLinks = document.getElementsByClassName("link");
 
     let url = window.location.href;
     let urlParts = url.split("/");
-    console.log(urlParts)
     let currentHref = urlParts.pop()
-    console.log(window.location.href);
-    console.log(currentHref);
 
 
     for (const link of navLinks) {
       link.classList.remove("link__active");
       let linkHref = link.getAttribute("href");
-      linkHref.replace(/#/g, '');
-      linkHref.replace(/\//g, '');
+      linkHref = linkHref.replace(/[^\w\s]/gi, '')
+      linkHref = linkHref.replace(/\s/g, '');
+      currentHref = currentHref.replace(/[^\w\s]/gi, '')
+      currentHref = currentHref.replace(/\s/g, '');
+
       // linkHref.replace(/\\|\//g, '');
-      console.log(`Current link href ${linkHref} && current href ${currentHref}`);
-      if (link.getAttribute("href") == "/" + currentHref) {
+     // console.log(`Current link href ${linkHref} && current href ${currentHref}`);
+      if (linkHref === currentHref) {
 
         link.classList += " link__active";
+    
       }
     }
   };
@@ -88,6 +88,12 @@ export const SideNav = (props) => {
     };
 
   }, [])
+
+  useEffect(() =>{
+
+    highlightSectionLink()
+
+  }, [dropdown.active])
 
 
 

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import {UserContext} from "../../contexts/UserContext";
 
 //Style
 import "./Login.scss";
@@ -11,29 +12,50 @@ import SectionHeader from "../../components/main-content/header-text/HeaderText"
 import Alert from "../../components/alert/Alert";
 import FilledButton from "../../components/buttons/filledButton/FilledButton";
 
+//Hooks
+import setUser from "../../hooks/SetUser";
+//API
+import usersDB from "../../api/users";
 //Data
 import users from "../../data/users/users";
 
-export const Login = () => {
-  //state
-  const [alert, setAlert] = useState({
-    showAlert: false,
-    alertText: "",
-    alertType: ""
-  });
 
-  let onSubmit = () => {
-    let username = document.getElementById("emailInput").value;
-    let password = document.getElementById("passwordInput").value;
-    let logged = false;
+export const Login = ({history}) => {
 
-    for (const user of users.data) {
-      if (user.username == username && user.password == password) {
-        sessionStorage.setItem("user", JSON.stringify(user));
+    //state
+    const [alert, setAlert] = useState({
+      showAlert: false,
+      alertText: "",
+      alertType: ""
+    });
+
+    //Context
+    const { user, setNewUser } = setUser();
+
+ 
+    let onSubmit = async () => {
+      let email = document.getElementById("emailInput").value;
+      let password = document.getElementById("passwordInput").value;
+      let logged = false;
+
+    try{
+      let response = await usersDB.get(`?email=${email}&pw=${password}`);
+      response = response.data[0];
+
+      if(response.email === email && response.password === password){
+        sessionStorage.setItem("user", JSON.stringify(response));
         logged = true;
-        window.location.reload();
+        setNewUser(
+         response
+        )
+        window.reload();
+   
       }
     }
+    catch(e){
+      console.log(e)
+    }
+
 
     !logged &&
       setAlert({
@@ -42,6 +64,12 @@ export const Login = () => {
         alertType: "error"
       });
   };
+
+  useEffect(() => {
+    console.log("user", user);
+  }, [user]);
+
+
 
   return (
     <div className="login-container">
