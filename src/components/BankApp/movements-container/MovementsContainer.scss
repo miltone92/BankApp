@@ -1,0 +1,11 @@
+@import "../../../style/Colors.scss";
+
+.movements-container{
+    background-color: $base-hover;
+    padding: 5px;
+    font-size: 14px;
+    max-height: 600px;
+    overflow-y: auto;
+    border-radius: 8px;
+  
+}

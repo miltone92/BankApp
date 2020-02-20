@@ -16,11 +16,9 @@ import FilledButton from "../../components/buttons/filledButton/FilledButton";
 import setUser from "../../hooks/SetUser";
 //API
 import usersDB from "../../api/users";
-//Data
-import users from "../../data/users/users";
 
 
-export const Login = ({history}) => {
+export const Login = () => {
 
     //state
     const [alert, setAlert] = useState({
@@ -48,7 +46,7 @@ export const Login = ({history}) => {
         setNewUser(
          response
         )
-        window.reload();
+        window.location.reload();
    
       }
     }

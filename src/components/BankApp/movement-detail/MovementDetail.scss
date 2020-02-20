@@ -1,0 +1,24 @@
+@import "../../../style//Colors.scss";
+
+.movement-detail{
+    display: flex;
+    justify-content: space-between;
+    padding: 7px;
+    border-bottom: 1px solid #dddddd;
+
+    &__amount{
+        display: flex;
+        align-items: center;
+        padding: 7px;
+
+        &--addition{
+            color: $flare-color;
+        }
+
+        &--subtraction{
+            color: coral
+        }
+    }
+
+    
+}

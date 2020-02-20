@@ -3,10 +3,10 @@ import "./FilledButton.scss";
 
 export class FilledButton extends Component {
   render() {
-    const { children, callback } = this.props;
+    const { children, callback, style } = this.props;
     return (
       <div>
-        <button className="filled-button" type="button" onClick={callback}>
+        <button style ={style} className="filled-button" type="button" onClick={callback}>
           {children}
         </button>
       </div>

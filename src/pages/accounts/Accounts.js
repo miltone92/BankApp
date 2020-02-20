@@ -19,32 +19,23 @@ export const Accounts = () =>{
         accounts: []
     })
 
-    
-
     let getAccountsData = async () =>{
-
-     
         let response = await accountsDB.get(`?owner=${user.email}`);
         response = response.data;
 
         setAccounts({
             accounts: response
         })
-
-     
-
     }
 
     useEffect(() =>{
-        
         console.log(user)
         // console.log(user.email)
-     
         getAccountsData();
     }, [])
 
     return(
-        <Section>
+        <ContentContainer>
             <SectionHeader>Accounts</SectionHeader>
             {accounts.accounts.map(a => (
                 <AccountContainer
@@ -53,19 +44,10 @@ export const Accounts = () =>{
                 number={a.accountNumber}
                 iban={a.iban}
                 balance={a.balance}
+                buttonLabel="Details"
                 />
             ))}
-                {/* <AccountContainer
-                title={"Account"}
-                number={accounts.}
-                >
-                    <h1>My First Bootstrap Page</h1>
-                    <p>This part is inside a .container class.</p> 
-                    <p>The .container class provides a responsive fixed width container.</p>
-                    <p>Resize the browser window to see that its width (max-width) will change at different breakpoints.</p>
-                </AccountContainer> */}
-            
-        </Section>
+        </ContentContainer>
     )
 }
 

@@ -14,6 +14,7 @@ import UserImage from "../user/userImage/UserImage"
 //Pages
 import UserList from "../../pages/UserList/UserList"
 import Accounts from "../../pages/accounts/Accounts"
+import AccountDetails from "../../pages/account-details/AccountDetails";
 
 export class Dashboard extends Component {
 
@@ -27,8 +28,8 @@ export class Dashboard extends Component {
         <UserImage callback={this.redirectToProfile} />
         <SideNav>
           <NavLogo href="/">
-            JosueSafe
-        </NavLogo>
+            BabeSafe
+          </NavLogo>
           <NavLink href="/Accounts">
           <i class="fas fa-piggy-bank"></i> Accounts
           </NavLink>
@@ -39,13 +40,16 @@ export class Dashboard extends Component {
         <MainContent>
           <Switch>
             <Route exact path="/">
-            <h1>Landing</h1>
+              <h1>Landing</h1>
             </Route>
             <Route exact path="/Accounts">
             <Accounts></Accounts>
             </Route>
             <Route exact path="/UserProfile">
-            <h1>Profile</h1>
+              <h1>Profile</h1>
+            </Route>
+            <Route exact path="/AccountDetails">
+              <AccountDetails></AccountDetails>
             </Route>
             {/* <Route exact path="/VideoSearch">
             <h1>Video</h1>
