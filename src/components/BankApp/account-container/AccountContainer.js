@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 //Style
 import "./AccountContainer.scss"
@@ -13,25 +13,29 @@ import FilledButton from "../../buttons/filledButton/FilledButton";
  ********************/
 export const AccountContainer = (props) =>{
 
-    let viewDetails = () =>{
-       window.location.href = `/AccountDetails?account=${props.number}`;
-    }
+    let useCallback = () =>{
+     props.callback(props.callbackParams)
+     }
+
 
     return(
-        <ContentContainer className="account-container">
-            <h1 className="account-container__title">{props.title}</h1>
+        <ContentContainer className="simple-container">
+            <h1 className="">{props.title}</h1>
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <div>
-                    <p className="account-container__detail"><label className="account-container__attribute">Account: </label> {props.number}</p>
-                    <p className="account-container__detail"><label className="account-container__attribute">IBAN: </label> {props.iban}</p>
-                    <p className="account-container__detail"><label className="account-container__attribute">Currency: </label> {props.currency}</p>
+                    <p className="simple-container__detail"><label className="simple-container__attribute">Account: </label> {props.number}</p>
+                    <p className="simple-container__detail"><label className="simple-container__attribute">IBAN: </label> {props.iban}</p>
+                    <p className="simple-container__detail"><label className="simple-container__attribute">Currency: </label> {props.currency}</p>
                 </div>
-    <FilledButton callback={viewDetails} style={{borderRadius: "10px"}}>{props.buttonLabel}</FilledButton>
+                {props.showButton === undefined
+                    ? <FilledButton callback={useCallback} style={{borderRadius: "10px"}}>{props.buttonLabel}</FilledButton>
+                    : <div/>
+                }
             </div>
           
                
            
-            <p className="account-container__balance"><label className="account-container__attribute">Balance: </label> {props.currency} {props.balance}</p>
+            <p className="simple-container__balance"><label className="simpe-container__attribute">Balance: </label> {props.currency} {props.balance}</p>
            
         </ContentContainer>
     )

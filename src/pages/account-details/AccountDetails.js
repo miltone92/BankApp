@@ -13,12 +13,15 @@ import ContentContainer from "../../components/main-content/content-container/Co
 import SectionHeader from "../../components/main-content/header-text/HeaderText";
 import AccountContainer from "../../components/BankApp/account-container/AccountContainer";
 import MovemetsContainer from "../../components/BankApp/movements-container/MovementsContainer"
+import MovementForm from "../../components/BankApp/movement-form/MovementForm"
+import ActionNav from "../../components/BankApp/account-action-menu/AccountActionMenu"
 
 
 export const AccountDetails = () => {
 
     const [movements, setMovements] = useState(null);
     const [account, setAccount] = useState(null);
+    const [view, setView] = useState("movements");
 
     let getUrlParam = (query) => {
         const queryString = window.location.search;
@@ -36,7 +39,10 @@ export const AccountDetails = () => {
         account = account.data[0];
         setAccount(account)
         console.log(account)
+    }
 
+    let toggleView = (view) =>{
+        setView(view);
     }
 
     useEffect(()=>{
@@ -49,19 +55,42 @@ export const AccountDetails = () => {
             <SectionHeader> Account Details</SectionHeader>
             {account !== null &&
             <AccountContainer
-            title={account.type.toUpperCase()}
-            currency={account.currency}
-            number={account.accountNumber}
-            iban={account.iban}
-            balance={account.balance}
-            buttonLabel = {"Actions"}
+                title={account.type.toUpperCase()}
+                currency={account.currency}
+                number={account.accountNumber}
+                iban={account.iban}
+                balance={account.balance}
+                buttonLabel = {"Actions"}
+                showButton = {false}
             ></AccountContainer> 
             } 
-            {movements !== null &&
-            <MovemetsContainer
-            movements={movements}
-            ></MovemetsContainer> 
+            <ActionNav
+                callback={toggleView}
+                redirects={[
+                    {
+                        title: "Movements",
+                        value: "movements"
+                    },
+                    {
+                        title: "Transfer",
+                        value: "movementForm"
+                    }
+                ]}
+            >
+                
+            </ActionNav>
+            {movements !== null && view === "movements"
+                &&<MovemetsContainer
+                    movements={movements}
+                    account={account}
+                ></MovemetsContainer> 
+            }  
+            {view === "movementForm" 
+                && <MovementForm
+                account = {account}
+                ></MovementForm> 
             } 
+
             
         </ContentContainer>
     )

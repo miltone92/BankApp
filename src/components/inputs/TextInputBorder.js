@@ -3,16 +3,24 @@ import "./TextInputBorder.scss";
 
 export class TextInputBorder extends Component {
   render() {
-    const { placeholder, type, id } = this.props;
+    const { placeholder, type, id, name, defaultValue, refInput, style } = this.props;
     return (
-      <div>
+   
         <input
           type={type}
           placeholder={placeholder}
           className="input-border"
           id={id}
+          name={name}
+          defaultValue = {defaultValue}
+          ref = {refInput}
+          style = {style}
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="none"
+          spellcheck="false"
         ></input>
-      </div>
+     
     );
   }
 }

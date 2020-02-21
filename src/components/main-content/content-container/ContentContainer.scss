@@ -1,13 +1,36 @@
+@import "../../../style//Colors.scss";
+
 
 
 .content-container{
-    width: 100%;
+    width: auto;
     padding: 5px 15px;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: auto;
     margin-left: auto;
 }
+
+.simple-container{
+    background-color: $base-color;
+    border-radius: 5px;
+    
+        &__detail{
+            margin: 4px 0px;
+        }
+    
+        &__attribute{
+            // text-transform: uppercase;
+            font-weight: 700;
+        }
+    
+        &__balance{
+            font-weight: 700;
+            text-align: right;
+            text-decoration: underline;
+            text-decoration-color: $flare-color;
+        }
+    }
 
 @media (min-width: 768px){
 

@@ -1,5 +1,4 @@
-$base-color: #3d3d3d;
-$flare-color: #c4e538;
+@import "../../style//Colors.scss ";
 
 .input-border {
   min-height: 30px;
@@ -7,13 +6,12 @@ $flare-color: #c4e538;
   display: block;
   margin: 10px 0px;
   width: 100%;
-  border-style: solid;
-  border-color: $flare-color;
-  border-width: 2px;
+  border: 2px solid $flare-color;
+  border-color:$flare-color;
   padding: 0;
   padding-left: 5px;
   font-size: 14px;
-color:#474747;
+  color:#474747;
 }
 
 .input-border::placeholder {

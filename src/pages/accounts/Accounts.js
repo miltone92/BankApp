@@ -28,23 +28,33 @@ export const Accounts = () =>{
         })
     }
 
+    //callback to send
+    let viewDetails = (accountNumber) =>{
+        window.location.href = `/AccountDetails?account=${accountNumber}`;
+     }
+
     useEffect(() =>{
         console.log(user)
         // console.log(user.email)
         getAccountsData();
     }, [])
 
+
+
     return(
         <ContentContainer>
             <SectionHeader>Accounts</SectionHeader>
             {accounts.accounts.map(a => (
                 <AccountContainer
+                account={a}
                 title={a.type.toUpperCase()}
                 currency={a.currency}
                 number={a.accountNumber}
                 iban={a.iban}
                 balance={a.balance}
                 buttonLabel="Details"
+                callback={viewDetails}
+                callbackParams={a.accountNumber}
                 />
             ))}
         </ContentContainer>
