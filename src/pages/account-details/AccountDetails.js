@@ -16,6 +16,7 @@ import MovemetsContainer from "../../components/BankApp/movements-container/Move
 import MovementForm from "../../components/BankApp/movement-form/MovementForm"
 import ActionNav from "../../components/BankApp/account-action-menu/AccountActionMenu"
 import PaymentsMenu from "../../components/BankApp/payment-menu/PaymentMenu"
+import StaticsMenu from "../../components/BankApp/statistics-menu/StatisticsMenu";
 
 
 export const AccountDetails = () => {
@@ -80,6 +81,10 @@ export const AccountDetails = () => {
                     {
                         title: "Payments",
                         value: "payments",
+                    },
+                    {
+                        title: "Statistics",
+                        value: "statistics",
                     }
                 ]}
                 view = {view}
@@ -108,7 +113,16 @@ export const AccountDetails = () => {
                     account={account}
                     callback={getAccountDetails}
                 ></PaymentsMenu> 
-            }  
+            } 
+
+            {/* Statistics */}
+            {   view === "statistics"
+                &&<StaticsMenu
+                    movements={movements}
+                    account={account}
+                ></StaticsMenu> 
+            }   
+            
        
 
           <br></br>

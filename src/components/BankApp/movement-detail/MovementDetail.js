@@ -10,8 +10,7 @@ import "./MovementDetail.scss"
  ********************/
 
 export const MovementDetail = (props) =>{
-console.log(props.movement)
-console.log(props.account)
+
 
     return(
         <div className={"movement-detail"}>

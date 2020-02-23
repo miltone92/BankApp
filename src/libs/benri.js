@@ -28,20 +28,20 @@ let getRandomNumberFromLimit = limit => {
 
 /**
  * Description: Returns a date time variable provided a String in LocaleString fromat.
- *
- * Example: "2/20/2020, 8:55:19 PM" => such date object instance
+ * Requiered format: locale('en-GB', { timeZone: 'UTC' })
+ * Example: "17/07/2020, 8:55:19 PM" => such date object instance
+ * Expamle: "day/month/year"
  * @param {localeString}   String    LocaleString.
  * @return {date} date object.
  */
 export let getDateFromLocaleString = localeString => {
 
-  console.log(localeString)
   localeString = localeString.replace("AM","");
   localeString = localeString.replace("PM","");
   localeString = localeString.replace(",","/");
   localeString = localeString.split(":").join("/");
   let localeStringArray = localeString.split('/')
-  let date = new Date(localeStringArray[0], localeStringArray[1], localeStringArray[2], localeStringArray[3], localeStringArray[4], localeStringArray[5])
+  let date = new Date(localeStringArray[2], localeStringArray[1] - 1, localeStringArray[0], localeStringArray[3], localeStringArray[4], localeStringArray[5])
 
   return date;
 }

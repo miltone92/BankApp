@@ -32,7 +32,7 @@ export const PaymentMenu = (props) =>{
 
         if (data.amount !== undefined){
         let now = new Date();
-        now = now.toLocaleString();
+        now = now.toLocaleString('en-GB');
         let service = benri.capitalizeFirstLetter(view)
             setMovement({
                 name : `${service} payment`,

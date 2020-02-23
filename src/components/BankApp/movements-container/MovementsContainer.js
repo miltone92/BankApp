@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 //Style
 import "./MovementsContainer.scss"
@@ -14,17 +14,20 @@ import benri from "../../../libs/benri"
  ********************/
 export const MovementsContainer = (props) =>{
 
-    console.log(props.movements)
+    // const [movements, setMovements] = (props.movement)
 
     useEffect(() =>{
 
+        let testDate = [];
+        console.log("**************************")
         let sortedMovements = props.movements.sort(function(a,b){
             b = benri.getDateFromLocaleString(b.date)
             a = benri.getDateFromLocaleString(a.date)
-
+            console.log(b - a)
             return b - a;
           });
         
+        //   setMovements(sortedMovements);
         console.log(sortedMovements);
     }, [])
     

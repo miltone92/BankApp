@@ -46,7 +46,7 @@ export const MovementForm = (props) => {
 
    let defineMovementSchema = (data) =>{
         let now = new Date();
-        now = now.toLocaleString();
+        now = now.toLocaleString('en-GB');
         setMovement({
             name : "Transfer",
             date : now,
