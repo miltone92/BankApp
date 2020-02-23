@@ -1,7 +1,6 @@
 import React from "react";
 
-//Components
-import ContentContainer from "../../main-content/content-container/ContentContainer"
+
 //Style
 import "./MovementDetail.scss"
 
@@ -24,7 +23,8 @@ console.log(props.account)
             <div className={"movement-detail__amount"}>
                 {props.account && props.movement.destination === props.account.accountNumber
                     ? <label className={`simple-container__attribute movement-detail__amount--addition`}> {props.movement.amount} </label>
-                    :  <label className={`simple-container__attribute movement-detail__amount--subtraction` }> {props.movement.amount} </label>}
+                    :  (<div><label className={`simple-container__attribute`}> </label><label className={`simple-container__attribute movement-detail__amount--subtraction` }> {props.movement.currency} {props.movement.amount} </label></div>)
+                    }
             </div>
         </div>
 

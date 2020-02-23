@@ -15,6 +15,7 @@ import AccountContainer from "../../components/BankApp/account-container/Account
 import MovemetsContainer from "../../components/BankApp/movements-container/MovementsContainer"
 import MovementForm from "../../components/BankApp/movement-form/MovementForm"
 import ActionNav from "../../components/BankApp/account-action-menu/AccountActionMenu"
+import PaymentsMenu from "../../components/BankApp/payment-menu/PaymentMenu"
 
 
 export const AccountDetails = () => {
@@ -45,6 +46,7 @@ export const AccountDetails = () => {
         setView(view);
     }
 
+
     useEffect(()=>{
         getAccountDetails();
     }, [])
@@ -69,29 +71,48 @@ export const AccountDetails = () => {
                 redirects={[
                     {
                         title: "Movements",
-                        value: "movements"
+                        value: "movements",
                     },
                     {
-                        title: "Transfer",
-                        value: "movementForm"
+                        title: "Transfers",
+                        value: "movementForm",
+                    },
+                    {
+                        title: "Payments",
+                        value: "payments",
                     }
                 ]}
+                view = {view}
             >
-                
             </ActionNav>
+
+            {/* Movements */}
             {movements !== null && view === "movements"
                 &&<MovemetsContainer
                     movements={movements}
                     account={account}
                 ></MovemetsContainer> 
             }  
+
+            {/* Transfers */}
             {view === "movementForm" 
                 && <MovementForm
                 account = {account}
+                callback = {getAccountDetails}
                 ></MovementForm> 
             } 
 
-            
+            {/* Payments */}
+            {   view === "payments"
+                &&<PaymentsMenu
+                    account={account}
+                    callback={getAccountDetails}
+                ></PaymentsMenu> 
+            }  
+       
+
+          <br></br>
+          <br></br>
         </ContentContainer>
     )
 

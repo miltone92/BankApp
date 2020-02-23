@@ -28,7 +28,7 @@ export class Dashboard extends Component {
         <UserImage callback={this.redirectToProfile} />
         <SideNav>
           <NavLogo href="/">
-            BabeSafe
+            Safe
           </NavLogo>
           <NavLink href="/Accounts">
           <i class="fas fa-piggy-bank"></i> Accounts

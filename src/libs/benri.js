@@ -47,8 +47,21 @@ export let getDateFromLocaleString = localeString => {
 }
 
 
+/**
+ * Description: Capitalizes the first letter of a string.
+ *
+ * Example: moon --> Moon
+ * @param {value}   String    sting value.
+ * @return {String} capitalized string.
+ */
+export function capitalizeFirstLetter(value) { 
+  return  value[0].toUpperCase() + value.slice(1); 
+} 
+
+
 export default {
   getRandomNumberFromLength,
   getRandomNumberFromLimit,
-  getDateFromLocaleString
+  getDateFromLocaleString,
+  capitalizeFirstLetter
 }

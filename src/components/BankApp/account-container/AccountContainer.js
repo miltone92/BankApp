@@ -5,7 +5,7 @@ import "./AccountContainer.scss"
 
 //Components
 import ContentContainer from "../../main-content/content-container/ContentContainer"
-import FilledButton from "../../buttons/filledButton/FilledButton";
+import FilledButton from "../../buttons/Button/Button";
 
 /********************
  * Component
@@ -35,7 +35,7 @@ export const AccountContainer = (props) =>{
           
                
            
-            <p className="simple-container__balance"><label className="simpe-container__attribute">Balance: </label> {props.currency} {props.balance}</p>
+            <p className="simple-container__balance"><label className="simpe-container__attribute"></label> {props.currency} {props.balance}</p>
            
         </ContentContainer>
     )

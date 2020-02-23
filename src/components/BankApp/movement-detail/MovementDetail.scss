@@ -16,7 +16,11 @@
         }
 
         &--subtraction{
-            color: coral
+            color: coral;
+
+            &:before{
+                content: "- ";
+            }
         }
     }
 

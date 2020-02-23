@@ -9,8 +9,8 @@ import "./Login.scss";
 import CheckBoxToggle from "../../components/checkBoxToggle/CheckBoxToggle";
 import TextInputBorder from "../../components/inputs/TextInputBorder";
 import SectionHeader from "../../components/main-content/header-text/HeaderText";
-import Alert from "../../components/alert/Alert";
-import FilledButton from "../../components/buttons/filledButton/FilledButton";
+import Alert from "../../components/alert/bar/Alert";
+import FilledButton from "../../components/buttons/Button/Button";
 
 //Hooks
 import setUser from "../../hooks/SetUser";

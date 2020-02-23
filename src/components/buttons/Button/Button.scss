@@ -1,0 +1,99 @@
+@import "../../../style/Colors.scss";
+
+
+.filled-button {
+  height: 50px;
+  width: 100%;
+  max-width: 80px;
+  font-size: 1rem;
+  background: #3d3d3d;
+  padding: 0 7px;
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  box-sizing: border-box;
+  cursor: pointer;
+  
+}
+
+
+.nav-button{
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+  color: #636e72;
+  font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 5px;
+
+  &--active{
+    border-bottom: 1px solid $flare-color;
+  }
+
+  &:hover{
+    border-bottom: 1px solid $flare-color;
+  }
+}
+
+.circular-button{
+    display: inline-block;
+    height: 3.5rem;
+    width: 3.5rem;
+    background-color: $main-text;
+    color: #fff;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 3.5rem;
+    margin-right: 1rem;
+    transition: background-color 0.5s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: 2px;
+    margin-bottom: 2px;
+
+    &--active{
+      background-color: $flare-color;
+    }
+
+    &--tv{
+      background-color: #9b59b6;
+      &:hover{
+        background-color: #9b59b6;
+        }
+    }
+
+    &--water{
+      background-color: #1e90ff;
+      &:hover{
+        background-color:  #1e90ff;
+        }
+    }
+
+    &--electric{
+      background-color: #ffa502;
+      &:hover{
+        background-color: #ffa502;
+        }
+    }
+
+    &--phone{
+      background-color: #27ae60;
+
+      &:hover{
+      background-color: #27ae60;
+      }
+    }
+
+
+    &:hover{
+      background-color: $flare-color;
+    }
+}
+
+
+//{margin: "5px", width: "auto", borderRadius: "4px"}
+
