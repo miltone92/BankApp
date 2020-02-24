@@ -1,13 +1,11 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
 
 //API
 import accountsDB from "../../api/accounts";
-
-//Context
-import {UserContext} from "../../contexts/UserContext"
+//Dependencies
+import { Doughnut } from 'react-chartjs-2';
 
 //Components
-import Section from "../../components/main-content/section/Section";
 import SectionHeader from "../../components/main-content/header-text/HeaderText";
 import ContentContainer from "../../components/main-content/content-container/ContentContainer"
 import AccountContainer from "../../components/BankApp/account-container/AccountContainer"
@@ -23,8 +21,16 @@ export const Accounts = () =>{
         let response = await accountsDB.get(`?owner=${user.email}`);
         response = response.data;
 
+        let accountTypes = [];
+        let accountBalances = [];
+        for (const a of response) {
+            accountTypes.push(a.type);
+            accountBalances.push(a.balance)
+        }
         setAccounts({
-            accounts: response
+            accounts: response,
+            accountTypes: accountTypes,
+            accountBalances: accountBalances
         })
     }
 
@@ -41,24 +47,34 @@ export const Accounts = () =>{
 
 
 
+
+
     return(
         <ContentContainer>
             <SectionHeader>Accounts</SectionHeader>
-            {accounts.accounts.map(a => (
-                <AccountContainer
-                account={a}
-                title={a.type.toUpperCase()}
-                currency={a.currency}
-                number={a.accountNumber}
-                iban={a.iban}
-                balance={a.balance}
-                buttonLabel="Details"
-                callback={viewDetails}
-                callbackParams={a.accountNumber}
-                />
-            ))}
+
+        
+                <div>
+                    {accounts.accounts.map(a => (
+                        <AccountContainer
+                        account={a}
+                        title={a.type.toUpperCase()}
+                        currency={a.currency}
+                        number={a.accountNumber}
+                        iban={a.iban}
+                        balance={a.balance}
+                        buttonLabel="Details"
+                        callback={viewDetails}
+                        callbackParams={a.accountNumber}
+                        />
+                        ))}
+                </div>
+         
+ 
+  
         </ContentContainer>
-    )
+           
+        )
 }
 
 export default Accounts;

@@ -15,11 +15,14 @@ import UserImage from "../user/userImage/UserImage"
 import UserList from "../../pages/UserList/UserList"
 import Accounts from "../../pages/accounts/Accounts"
 import AccountDetails from "../../pages/account-details/AccountDetails";
+import Statistics from "../../pages/statistics/Statistics"
 
 export class Dashboard extends Component {
 
   redirectToProfile = () => {
-    window.location.href = "/UserProfile";
+    //window.location.href = "/UserProfile";
+    sessionStorage.removeItem("user");
+    window.location.reload();
   }
 
   render() {
@@ -31,8 +34,14 @@ export class Dashboard extends Component {
             Safe
           </NavLogo>
           <NavLink href="/Accounts">
-          <i class="fas fa-piggy-bank"></i> Accounts
+          <i className="fas fa-piggy-bank side-nav__icon"></i> Accounts
           </NavLink>
+          <NavLink href="/Statistics">
+          <i className="fas fa-chart-pie side-nav__icon"></i> Statistics
+          </NavLink>
+
+
+
 
 
 
@@ -50,6 +59,9 @@ export class Dashboard extends Component {
             </Route>
             <Route exact path="/AccountDetails">
               <AccountDetails></AccountDetails>
+            </Route>
+            <Route exact path="/Statistics">
+              <Statistics></Statistics>
             </Route>
             {/* <Route exact path="/VideoSearch">
             <h1>Video</h1>

@@ -11,7 +11,7 @@ export const AccountActionMenu = (props) =>{
 
         
     return(
-        <ContentContainer className={"simple-container center-children"} >
+        <ContentContainer className={"simple-container center-children overflow-y"} >
             {props.redirects.map(redirect => (
                 props.view === redirect.value
                 ? <FilledButton className={"nav-button nav-button--active"} callback={() => props.callback(redirect.value)}>{redirect.title}</FilledButton>
