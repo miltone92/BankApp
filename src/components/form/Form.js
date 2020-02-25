@@ -12,9 +12,10 @@ import TextInputBorder from "../inputs/TextInputBorder";
  * 
 ********************/
 export const Form = (props) =>{
+    console.log(props.inputs)
 
     //Props
-    const { title, inputs, callback } = props;
+    const { title, inputs, callback, buttonTitle, selects} = props;
     //Hook Forms`
     const { register, handleSubmit, watch, errors } = useForm();
     
@@ -26,9 +27,8 @@ export const Form = (props) =>{
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h2 style={{fontSize : "16px"}}>{title}</h2>
-
             <div className="flex-col">
-                {inputs.map((input) => (
+                {inputs !== undefined && inputs.map((input) => (
                     <TextInputBorder 
                         style={{maxWidth: "200px", borderTop: "none", borderRight: "none", borderLeft: "none", borderWidth: "1px"}}
                         placeholder={input.placeholder} 
@@ -38,7 +38,23 @@ export const Form = (props) =>{
                         >
                     </TextInputBorder>
                 ))}
-                <input className={"filled-button"} style={{width: "auto", borderRadius: "4px", minWidth: "100px", maxWidth: "200px"}} type="submit" />
+                    {selects !== undefined && selects.map((select) => (
+                        <select 
+                            name={select.name}
+                            ref={register}
+                        >
+                            {
+                            select.options.map((option) => (
+                                <option value={option}>{option}</option>
+                            ))}
+
+                        </select>
+                    ))}
+                <button className={"filled-button"} style={{width: "auto", borderRadius: "4px", minWidth: "100px", maxWidth: "200px"}} type="submit">
+                    {buttonTitle === undefined 
+                        ? "Submit"
+                        : buttonTitle}
+                </button>
             </div>
         </form>
     )

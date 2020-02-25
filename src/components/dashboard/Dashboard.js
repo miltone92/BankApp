@@ -63,14 +63,6 @@ export class Dashboard extends Component {
             <Route exact path="/Statistics">
               <Statistics></Statistics>
             </Route>
-            {/* <Route exact path="/VideoSearch">
-            <h1>Video</h1>
-            </Route>
-            <Route exact path="/KanjiStudy">
-            <h1>study</h1>
-            </Route>
-             */}
-
 
 
           </Switch>

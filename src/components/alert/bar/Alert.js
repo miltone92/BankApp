@@ -8,13 +8,14 @@ export const Alert = (props) =>{
 
   
   useEffect(() =>{
-
+ 
   }, [])
 
   let removeAlert = () => {
     //animate
     setMargin("-60px")
     setTimeout(() => {
+      setMargin("0px")
       callback();
     }, 850);
   

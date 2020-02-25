@@ -1,4 +1,28 @@
 /**
+ * Description: Capitalizes the first letter of a string.
+ *
+ * Example: moon --> Moon
+ * @param {value}   String    sting value.
+ * @return {String} capitalized string.
+ */
+export function capitalizeFirstLetter(value) { 
+  return  value[0].toUpperCase() + value.slice(1); 
+} 
+
+/**
+ * Description: Gets indicated last amount characters from provided string
+ *
+ * @param {query}   var    original string from which to get characters.
+ * @param {characterAmount}   number    The amount of characters to extract.
+ * @return {String} Last indicated characters from string.
+ */
+let getLastCharactersFromString = (query, characterAmount) => {
+  var result = query.substr(query.length - characterAmount);
+  return result;
+};
+
+
+/**
  * Description: Generate random number from length.
  *
  * @param {number}   var    Number length.
@@ -47,21 +71,13 @@ export let getDateFromLocaleString = localeString => {
 }
 
 
-/**
- * Description: Capitalizes the first letter of a string.
- *
- * Example: moon --> Moon
- * @param {value}   String    sting value.
- * @return {String} capitalized string.
- */
-export function capitalizeFirstLetter(value) { 
-  return  value[0].toUpperCase() + value.slice(1); 
-} 
+
 
 
 export default {
+  capitalizeFirstLetter,
+  getLastCharactersFromString,
   getRandomNumberFromLength,
   getRandomNumberFromLimit,
   getDateFromLocaleString,
-  capitalizeFirstLetter
 }

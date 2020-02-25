@@ -6,8 +6,9 @@ import "./ContentContainer.scss"
 
 export const ContentContainer = (props) =>{
 
+    const {className, style} = props;
     return(
-        <div className={`content-container ${props.className}`}>
+        <div className={`content-container ${className}`} style={style}>
             {props.children}
         </div>
     )

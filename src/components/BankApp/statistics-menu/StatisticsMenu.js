@@ -63,19 +63,17 @@ export const StatisticMenu = (props) =>{
                             {
                                 label: `Expenditure  (${props.account.currency})`,
                                 data: currentMonth.expenditure,
-                                backgroundColor: "rgba(255, 107, 129,0.3)",
-                                borderColor: "rgba(255, 107, 129,1.0)",
+                                backgroundColor: "rgba(255, 75, 43, 0.3)",
+                                borderColor: "rgba(255, 75, 43, 1.0)",
                                 borderWidth: 1,
 
                             }, 
                             {
                                 label: `Incomes  (${props.account.currency})`,
                                 data: currentMonth.income,
-                                backgroundColor: "rgba(46, 204, 113,0.3)",
-                                borderColor: "rgba(46, 204, 113,1.0)",
+                                backgroundColor: "rgba(107, 194, 99, 0.3)",
+                                borderColor: "rgb(107, 194, 99)",
                                 borderWidth: 0,
-                                
-
                             },
                             
                             ]
@@ -87,7 +85,7 @@ export const StatisticMenu = (props) =>{
                             fontSize: 20
                             },
                             legend: {
-                            display: false,
+                            display: true,
                             position: 'top'
                             },
                             labels:{

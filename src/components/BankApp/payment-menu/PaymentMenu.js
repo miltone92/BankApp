@@ -98,7 +98,6 @@ export const PaymentMenu = (props) =>{
 
     useEffect(()=>{
         console.log("in use effect")
-        console.log(movement)
 
         if(movement !== null && movement.amount !== undefined){
             postMovement();
@@ -109,20 +108,19 @@ export const PaymentMenu = (props) =>{
     return (
         <ContentContainer className="simple-container">
 
-        <h1 className="simple-container__title">Payments</h1>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+                <h1 className="simple-container__title">Payments</h1>
 
-            {!alert.show &&
-            <ContentContainer>
-                <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
-                    <Button callback={getWaterServiceForm} className={ view === "water" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-tint"></i></Button>
-                    <Button callback={getElectricServiceForm} className={ view === "electric" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-bolt"></i></Button>
-                    <Button callback={getPhoneServiceForm} className={ view === "phone" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-phone"></i></Button>
-                    <Button callback={getTvServiceForm} className={ view === "tv" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-tv"></i></Button>
-                    
-                </div>
-            </ContentContainer>
-            
+                {!alert.show &&
+                    <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: 'center'}}>
+                        <Button callback={getWaterServiceForm} className={ view === "water" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-tint"></i></Button>
+                        <Button callback={getElectricServiceForm} className={ view === "electric" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-bolt"></i></Button>
+                        <Button callback={getPhoneServiceForm} className={ view === "phone" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-phone"></i></Button>
+                        <Button callback={getTvServiceForm} className={ view === "tv" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-tv"></i></Button>
+                    </div>
+        
             }
+            </div>
             {/* water  */}
             {view === "water" && !alert.show
                 &&<Form
