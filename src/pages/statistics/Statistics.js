@@ -72,6 +72,17 @@ export const Statistics = () =>{
                     "#7158e2"
                     ]
                 }],
+                options:{
+                            legend: {
+                            display: true,
+                            position: 'top',
+                            labels:{
+                                fontSize: 14,
+                                },
+                            
+                            },
+                        }
+                
                
 
             })
@@ -88,7 +99,8 @@ export const Statistics = () =>{
         switch (true){
             case view === "Doughnut":
                 return (  
-                    <Doughnut data={data} />
+                    <Doughnut data={data}
+                            options={data.options} />
                 );
                 case view === "Pie":
                     return (  

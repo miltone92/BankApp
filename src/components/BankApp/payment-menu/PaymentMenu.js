@@ -18,7 +18,7 @@ import benri from "../../../libs/benri"
 
 export const PaymentMenu = (props) =>{
 
-    const [view, setView] = useState();
+    const [view, setView] = useState("Water");
     const [movement, setMovement] = useState(null);
     const [alert, setAlert] = useState({
         show: false,
@@ -42,31 +42,32 @@ export const PaymentMenu = (props) =>{
                 origin : props.account.accountNumber,
                 destination : "payment",
                 amount : data.amount, 
-                currency : "USD"
+                currency : "USD",
+
         })
     }
    }
 
     let getWaterServiceForm = (data) =>{
-        setView("water")
+        setView("Water")
         defineMovementSchema(data)
         console.log(data)
     }
 
     let getElectricServiceForm = (data) =>{
-        setView("electric")
+        setView("Electric")
         defineMovementSchema(data)
         console.log(data)
     }
 
     let getPhoneServiceForm = (data) =>{
-        setView("phone")
+        setView("Phone")
         defineMovementSchema(data)
         console.log(data)
     }
 
     let getTvServiceForm = (data) =>{
-        setView("tv")
+        setView("Tv")
         defineMovementSchema(data)
         console.log(data)
     }
@@ -100,31 +101,41 @@ export const PaymentMenu = (props) =>{
         console.log("in use effect")
 
         if(movement !== null && movement.amount !== undefined){
-            postMovement();
+
+            props.account.balance - movement.amount  >= 0
+                ? postMovement()
+                : setAlert({
+                    show: true,
+                    type: "Error",
+                    title: "Error",
+                    message: `You don't have enough money in your balance`,
+                    buttonLabel: "OK",
+                  });
+        
         }
 
     },[movement])
     
     return (
-        <ContentContainer className="simple-container">
+        <ContentContainer className="simple-container" style={{minHeight: "285px"}}>
 
             <div style={{display: "flex", justifyContent: "space-between"}}>
-                <h1 className="simple-container__title">Payments</h1>
+    <h1 className="simple-container__title">{`${view} Service`}</h1>
 
                 {!alert.show &&
-                    <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: 'center'}}>
-                        <Button callback={getWaterServiceForm} className={ view === "water" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-tint"></i></Button>
-                        <Button callback={getElectricServiceForm} className={ view === "electric" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-bolt"></i></Button>
-                        <Button callback={getPhoneServiceForm} className={ view === "phone" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-phone"></i></Button>
-                        <Button callback={getTvServiceForm} className={ view === "tv" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-tv"></i></Button>
+                    <div style={{display: "flex", flexWrap: "wrap", justifyContent: "Center", alignItems: 'center'}}>
+                        <Button callback={getWaterServiceForm} className={ view === "Water" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-tint"></i></Button>
+                        <Button callback={getElectricServiceForm} className={ view === "Electric" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-bolt"></i></Button>
+                        <Button callback={getPhoneServiceForm} className={ view === "Phone" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-phone"></i></Button>
+                        <Button callback={getTvServiceForm} className={ view === "Tv" ? "circular-button  circular-button--active" : "circular-button"}><i class="fas fa-tv"></i></Button>
                     </div>
         
             }
             </div>
             {/* water  */}
-            {view === "water" && !alert.show
+            {view === "Water" && !alert.show
                 &&<Form
-                    title = {"Pay Water Service"}
+                    title = {""}
                     inputs = {[
                         {
                             name: "detail",
@@ -139,9 +150,9 @@ export const PaymentMenu = (props) =>{
             }  
 
             {/* electricity */}
-            {view === "electric" && !alert.show
+            {view === "Electric" && !alert.show
                 && <Form
-                    title = {"Pay Electric Service"}
+                    title = {""}
                     inputs = {[
                         {
                             name: "detail",
@@ -156,9 +167,9 @@ export const PaymentMenu = (props) =>{
             } 
 
             {/* phone */}
-            {   view === "phone" && !alert.show
+            {   view === "Phone" && !alert.show
                 &&<Form
-                    title = {"Pay Phone Service"}
+                    title = {""}
                     inputs = {[
                         {
                             name: "detail",
@@ -173,9 +184,9 @@ export const PaymentMenu = (props) =>{
                 ></Form> 
             }  
             {/* tv */}
-            {   view === "tv" && !alert.show
+            {   view === "Tv" && !alert.show
                 &&<Form
-                    title = {"Pay Television Service"}
+                    title = {""}
                     inputs = {[
                         {
                             name: "detail",

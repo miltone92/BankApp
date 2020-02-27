@@ -1,10 +1,31 @@
+TODO:
+
 //profile
-//pw channge
-//transfer money 
-// view movements
-// ver saldos, movimientos, fechas, filtros para moviemients....
-// pagos de servicios, agua, luz, telefono
-// graficos para reportes, gastos, ingresos
+// pw channge
 // categorizar moviemientos: servicios, compras, tranferencias.
 // JWT security
 // api banco central - SOPA - XML --*opcional
+// login should be responsive
+// erickas says: accounts should have a limit....
+// send emails when amount is received to receiver
+
+
+DONE:
+
+// ver saldos, movimientos, fechas, filtros para moviemients....
+// transfer money 
+// view movements
+// pagos de servicios, agua, luz, telefono
+// graficos para reportes, gastos, ingresos
+// add min height to payments
+// separate forms  button and input  space between input and button
+// on transfer show full name
+// make headers smaller
+// add account button not responsive * just made headers smaller
+// you should not be able to transfer more money than what you have
+// make graph labels bigger
+
+
+
+
+

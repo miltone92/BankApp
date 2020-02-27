@@ -61,6 +61,7 @@ export const Accounts = () =>{
             iban: iban,
             currency: data.currency,
             owner: user.email,
+            ownerName: user.username,
         }
         console.log(newAccount)
         try{
@@ -103,10 +104,10 @@ export const Accounts = () =>{
         //Modal will hold a container with a form
         console.log("get modal content")
         return (
-            <ContentContainer className="simple-container" >
+            <ContentContainer className="simple-container" style={{maxWidth: "250px", padding:"30px 5px"}}>
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <Form
-                        title = {"Create new account"}
+                        title = {"Create New Account"}
                         inputs = {[
                             {
                                 name: "type",

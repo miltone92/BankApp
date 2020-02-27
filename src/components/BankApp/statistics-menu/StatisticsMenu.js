@@ -86,10 +86,21 @@ export const StatisticMenu = (props) =>{
                             },
                             legend: {
                             display: true,
-                            position: 'top'
-                            },
+                            position: 'top',
                             labels:{
-                                display: false
+                                fontSize: 14,
+                                },
+                            
+                            },
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        fontSize: 8,
+                                        autoSkip: false,
+                                        maxRotation: 90,
+                                        minRotation: 90
+                                    }
+                                }]
                             }
                         }}
                     >

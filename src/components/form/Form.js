@@ -40,6 +40,7 @@ export const Form = (props) =>{
                 ))}
                     {selects !== undefined && selects.map((select) => (
                         <select 
+                            className="input-gray"
                             name={select.name}
                             ref={register}
                         >
@@ -50,6 +51,7 @@ export const Form = (props) =>{
 
                         </select>
                     ))}
+                <br/>
                 <button className={"filled-button"} style={{width: "auto", borderRadius: "4px", minWidth: "100px", maxWidth: "200px"}} type="submit">
                     {buttonTitle === undefined 
                         ? "Submit"

@@ -3,15 +3,15 @@ import {UserContext} from "../../contexts/UserContext";
 
 //Style
 import "./Login.scss";
-
-//Components
-
 //Dependencies
 import {useForm} from 'react-hook-form'
 //API
-import usersDB from "../../api/users";
+import usersApi from "../../api/users";
+import logApi from "../../api/log"
 //Components
 import Alert from "../../components/alert/bar/Alert";
+//Libs
+import benri from "../../libs/benri";
 
 
 export const Login = () => {
@@ -24,16 +24,62 @@ export const Login = () => {
   const [alert, setAlert] = useState({showAlert: false});
   const [panel, setPanel] = useState("")
 
+  let getAndPostLog = async (user) =>{
+
+    let now = new Date();
+    now = now.toLocaleString('en-GB');
+    let logInfo = benri.getOSandBrowser();
+    console.log("logInfo")
+    console.log(logInfo)
+    let log = {
+      user: user,
+      os: logInfo.os,
+      osVersion: logInfo.osVersion,
+      browser: logInfo.browser,
+      browserVersion: logInfo.browserVersion,
+      date: now
+    }
+    
+    let emptyLog = {
+      user: user,
+      os: "unavailable",
+      osVersion: "unavailable",
+      browser: "unavailable",
+      browserVersion: "unavailable",
+      date: "unavailable"
+    }
+
+    //GET
+    try{
+      let response = await logApi.get(`?user=${user}`);
+      console.log(response)
+      sessionStorage.setItem("log", JSON.stringify(response.data));
+    }
+    catch(e){
+      sessionStorage.setItem("log", JSON.stringify(emptyLog));
+    }
+
+
+
+
+    //POST
+      let postResponse = await logApi.post(``, log);
+      console.log(postResponse)
+
+     window.location.reload();
+  }
+
   let signInSubmit = async (data) =>{
     console.log("login")
     console.log(data)
     try{
-      let response = await usersDB.get(`?email=${data.email}&pw=${data.password}`);
+      let response = await usersApi.get(`?email=${data.email}&pw=${data.password}`);
       response = response.data[0];
 
       if(response.email === data.email && response.password === data.password){
           sessionStorage.setItem("user", JSON.stringify(response));
-          window.location.reload();
+          getAndPostLog(data.email);
+      
         }
     }
     catch(e){
@@ -59,7 +105,7 @@ export const Login = () => {
 
     try{
       console.log(user)
-      let response = await usersDB.post("", user);
+      let response = await usersApi.post("", user);
       response.status == 200
         &&       setAlert({
           showAlert: true,

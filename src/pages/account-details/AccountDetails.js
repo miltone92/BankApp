@@ -75,6 +75,10 @@ export const AccountDetails = () => {
                         value: "movements",
                     },
                     {
+                        title: "Statistics",
+                        value: "statistics",
+                    },
+                    {
                         title: "Transfers",
                         value: "movementForm",
                     },
@@ -82,10 +86,7 @@ export const AccountDetails = () => {
                         title: "Payments",
                         value: "payments",
                     },
-                    {
-                        title: "Statistics",
-                        value: "statistics",
-                    }
+
                 ]}
                 view = {view}
             >

@@ -3,22 +3,22 @@ import "./TextInputBorder.scss";
 
 export class TextInputBorder extends Component {
   render() {
-    const { placeholder, type, id, name, defaultValue, refInput, style } = this.props;
+    const { placeholder, type, id, name, defaultValue, refInput, style, className } = this.props;
     return (
    
         <input
           type={type}
           placeholder={placeholder}
-          className="input-border"
+          className={ className ? className : "input-gray"}
           id={id}
           name={name}
           defaultValue = {defaultValue}
           ref = {refInput}
           style = {style}
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="none"
-          spellcheck="false"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="none"
+          spellCheck="false"
         ></input>
      
     );
