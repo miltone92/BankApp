@@ -12,19 +12,19 @@ TODO:
 
 DONE:
 
-// ver saldos, movimientos, fechas, filtros para moviemients....
-// transfer money 
+// ver saldos, movimientos, fechas, filtros para moviemients.... ✔
+// transfer money ✔
 // view movements
-// pagos de servicios, agua, luz, telefono
-// graficos para reportes, gastos, ingresos
+// pagos de servicios, agua, luz, telefono ✔
+// graficos para reportes, gastos, ingresos ✔
 // add min height to payments
 
-// separate forms  button and input  space between input and button
-// on transfer show full name
-// make headers smaller
-// add account button not responsive * just made headers smaller
-// you should not be able to transfer more money than what you have
-// make graph labels bigger
+// separate forms  button and input  space between input and button ✔
+// on transfer show full name ✔
+// make headers smaller ✔
+// add account button not responsive * just made headers smaller ✔
+// you should not be able to transfer more money than what you have ✔
+// make graph labels bigger ✔
 
 
 
@@ -53,4 +53,4 @@ QA: Functionality
 // On Transfers: When an account that doesn't exist is entered, feedback should ve received ✔
 Maybe is shoul validate:
 No negative numbers on forms
-No paying card that has a debt of 0.
+No paying card that has a debt of 0.✔

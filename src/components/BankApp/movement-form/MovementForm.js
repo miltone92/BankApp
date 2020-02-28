@@ -69,7 +69,7 @@ export const MovementForm = (props) => {
             origin : props.account.accountNumber,
             destination : destination.accountNumber,
             amount : data.amount, 
-            currency : "USD",
+            currency : destination.currency,
     })
    }
 
@@ -95,7 +95,7 @@ export const MovementForm = (props) => {
         show: true,
         type: "success",
         title: "Success",
-        message: `The amount of ${movement.amount} has been transfered to: ${movement.destination}`,
+        message: `The amount of ${movement.amount} ${movement.currency} has been transfered to: ${movement.destination}`,
         buttonLabel: "OK",
       });
    

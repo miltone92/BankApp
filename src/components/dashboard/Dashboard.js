@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 //Dependencies
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
@@ -16,6 +16,8 @@ import Accounts from "../../pages/accounts/Accounts"
 import AccountDetails from "../../pages/account-details/AccountDetails";
 import Statistics from "../../pages/statistics/Statistics"
 import Landing from "../../pages/landing/Landing"
+//api
+import currencyLayer from "../../api/currencyLayer"
 
 
 
@@ -23,6 +25,8 @@ import Landing from "../../pages/landing/Landing"
 export const Dashboard = () => {
 
   const log = JSON.parse(sessionStorage.getItem("log"));
+  const [exchangeRate, setExchangeRate] = useState(null)
+
 
   let redirectToProfile = () => {
     //window.location.href = "/UserProfile";
@@ -30,6 +34,15 @@ export const Dashboard = () => {
     window.location.reload();
   }
 
+
+    let getCurrencyExchangeRate = async () =>{
+      let response = await currencyLayer.get();
+      setExchangeRate(Math.round(response.data.quotes.USDCRC))
+  }
+
+    useEffect(() =>{
+     // getCurrencyExchangeRate();
+  }, [])
 
   
     return (
@@ -51,13 +64,18 @@ export const Dashboard = () => {
             growBank <i className="fas fa-seedling"></i>
           </NavLogo>
           <NavLink href="/AccountsDebit">
-          <i className="fas fa-piggy-bank side-nav__icon"></i> Accounts
+            <i className="fas fa-piggy-bank side-nav__icon"></i> Accounts
           </NavLink>
           <NavLink href="/AccountsCredit">
-          <i className="fas fa-credit-card side-nav__icon"></i> Cedit Cards
+            <i className="fas fa-credit-card side-nav__icon"></i> Cedit Cards
           </NavLink>
           <NavLink href="/Statistics">
-          <i className="fas fa-chart-pie side-nav__icon"></i> Statistics
+            <i className="fas fa-chart-pie side-nav__icon"></i> Statistics
+          </NavLink>
+        
+         
+          <NavLink href="#" style={{marginTop: "20px"}} className={""}>
+            <i class="fas fa-exchange-alt side-nav__icon"></i> {` 1 USD : 568 CRC`}
           </NavLink>
         </SideNav>
 

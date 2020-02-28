@@ -12,11 +12,12 @@ export class NavLink extends Component {
     };
 
     render() {
-        const { href, style } = this.props;
+        const { href, className, style } = this.props;
         //  Spreding: const { href, message } = this.props; in case you send more than one prop
         return (
             <a
-                className={style === undefined ? "link" : `${style}`}
+                className={`link ${className}`}
+                style={style}
                 href={href}
             >
                 {this.state.label}

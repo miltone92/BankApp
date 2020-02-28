@@ -2,9 +2,9 @@ import React, {useState, useEffect} from "react";
 
 //API
 import accountsDB from "../../api/accounts";
+import currencyLayer from "../../api/currencyLayer"
 //Dependencies
 import { Doughnut, Pie, Bar } from 'react-chartjs-2';
-
 //Components
 import SectionHeader from "../../components/main-content/header-text/HeaderText";
 import ContentContainer from "../../components/main-content/content-container/ContentContainer"
@@ -18,6 +18,7 @@ export const Statistics = () =>{
         accounts: []
     })
     const [view, setView] = useState("Doughnut");
+    const [exchangeRate, setExchangeRate] = useState(null)
 
     let getAccountsData = async () =>{
         let response = await accountsDB.get(`?owner=${user.email}`);
@@ -34,6 +35,10 @@ export const Statistics = () =>{
         let accountBalances = [];
         for (const a of accountsToUse) {
             accountNames.push(a.name);
+            if(a.currency === "CRC"){
+               // a.balance = Math.round(a.balance / 568)
+                a.balance = Math.round(a.balance / exchangeRate);
+            }
             accountBalances.push(a.balance)
         }
         setAccounts({
@@ -48,9 +53,21 @@ export const Statistics = () =>{
         window.location.href = `/AccountDetails?account=${accountNumber}`;
      }
 
+    let getCurrencyExchangeRate = async () =>{
+        let response = await currencyLayer.get();
+        setExchangeRate(Math.round(response.data.quotes.USDCRC))
+    }
+
     useEffect(() =>{
-        getAccountsData();
+        getCurrencyExchangeRate();
     }, [])
+
+    useEffect(() =>{
+
+        exchangeRate !== null &&
+            getAccountsData();
+     
+    }, [exchangeRate])
 
     useEffect(() => {
 
