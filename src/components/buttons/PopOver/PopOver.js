@@ -22,8 +22,8 @@ export const PopOver = (props) =>{
           
             <div className={`pop-over__container`} style={{marginLeft: popOver ? "0px" : "-290px"}}>
                 <p className="pop-over__title">{title}</p>
-                {list.map((item) =>(
-                        <p className="pop-over__content">{item}</p>
+                {list.map((item, i) =>(
+                        <p key={`item-${i}`}className="pop-over__content">{item}</p>
                 ))}
             </div>
         

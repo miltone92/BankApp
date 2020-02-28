@@ -4,7 +4,7 @@ import "./Video.scss";
 export class VideoDetails extends Component {
   render() {
     const { video } = this.props;
-    console.log(video);
+
     let videoSrc = `http://www.youtube.com/embed/${video.id.videoId}`;
     return (
       <div className="video-detail">

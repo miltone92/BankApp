@@ -23,15 +23,22 @@ export const Statistics = () =>{
         let response = await accountsDB.get(`?owner=${user.email}`);
         response = response.data;
 
-        let accountTypes = [];
-        let accountBalances = [];
+        //We must filter the response
+        //Depending on whether we need credit or debit
+        let accountsToUse = [];
         for (const a of response) {
-            accountTypes.push(a.type);
+            a.type === "debit" && accountsToUse.push(a)
+        }
+
+        let accountNames = [];
+        let accountBalances = [];
+        for (const a of accountsToUse) {
+            accountNames.push(a.name);
             accountBalances.push(a.balance)
         }
         setAccounts({
             accounts: response,
-            accountTypes: accountTypes,
+            accountNames: accountNames,
             accountBalances: accountBalances
         })
     }
@@ -42,8 +49,6 @@ export const Statistics = () =>{
      }
 
     useEffect(() =>{
-        console.log(user)
-        // console.log(user.email)
         getAccountsData();
     }, [])
 
@@ -51,7 +56,7 @@ export const Statistics = () =>{
 
         accounts !== null &&
             setData({
-                labels: accounts.accountTypes,
+                labels: accounts.accountNames,
                 datasets: [{
                     data: accounts.accountBalances,
                     label: "",

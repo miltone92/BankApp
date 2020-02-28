@@ -18,6 +18,7 @@ import benri from "../../../libs/benri"
 
 export const PaymentMenu = (props) =>{
 
+    const {balance} = props;
     const [view, setView] = useState("Water");
     const [movement, setMovement] = useState(null);
     const [alert, setAlert] = useState({
@@ -49,46 +50,86 @@ export const PaymentMenu = (props) =>{
    }
 
     let getWaterServiceForm = (data) =>{
+            
         setView("Water")
-        defineMovementSchema(data)
-        console.log(data)
+        if(data.amount !== undefined){
+
+            if( data.amount >= 0 ){
+                defineMovementSchema(data)
+            }else{
+                setAlert({
+                show: true,
+                type: "error",
+                title: "Error",
+                message: `Amount must be greater than zero`,
+                buttonLabel: "OK",
+            });
+            }
+        }
+
     }
 
     let getElectricServiceForm = (data) =>{
+
         setView("Electric")
-        defineMovementSchema(data)
-        console.log(data)
+        if(data.amount !== undefined){
+
+            if(data.amount >= 0 ){
+                defineMovementSchema(data)
+            }else{
+                setAlert({
+                show: true,
+                type: "error",
+                title: "Error",
+                message: `Amount must be greater than zero`,
+                buttonLabel: "OK",
+            });
+            }
+
+         }
     }
 
     let getPhoneServiceForm = (data) =>{
+
         setView("Phone")
-        defineMovementSchema(data)
-        console.log(data)
+        if(data.amount !== undefined){
+
+            if(data.amount >= 0 ){
+                defineMovementSchema(data)    
+            }else{
+                setAlert({
+                show: true,
+                type: "error",
+                title: "Error",
+                message: `Amount must be greater than zero`,
+                buttonLabel: "OK",
+            });
+            }
+        }
     }
 
     let getTvServiceForm = (data) =>{
+
         setView("Tv")
-        defineMovementSchema(data)
-        console.log(data)
+        if(data.amount !== undefined){
+
+            if(data.amount >= 0 ){
+                defineMovementSchema(data)
+            }else{
+                setAlert({
+                show: true,
+                type: "error",
+                title: "Error",
+                message: `Amount must be greater than zero`,
+                buttonLabel: "OK",
+            });
+            }
+        }
     }
 
 
     
-   let postMovement = async () =>{
-       console.log("in post")
-        await movementAPI.post(`?destination=${movement.origin}`, movement);
-
-
-        setAlert({
-            show: true,
-            type: "success",
-            title: "Success",
-            message: `The amount of ${movement.currency} ${movement.amount} has been payed. ${movement.detail}`,
-            buttonLabel: "OK",
-          });
-
-        props.callback();
-   }
+  
 
    let resetForm = () =>{
         setMovement(false)
@@ -98,22 +139,35 @@ export const PaymentMenu = (props) =>{
     }
 
     useEffect(()=>{
-        console.log("in use effect")
-
         if(movement !== null && movement.amount !== undefined){
+
+            let postMovement = async () =>{
+     
+                await movementAPI.post(`?destination=${movement.origin}`, movement);
+        
+        
+                setAlert({
+                    show: true,
+                    type: "success",
+                    title: "Success",
+                    message: `The amount of ${movement.currency} ${movement.amount} has been payed. ${movement.detail}`,
+                    buttonLabel: "OK",
+                  });
+        
+                props.callback();
+           }
+
 
             props.account.balance - movement.amount  >= 0
                 ? postMovement()
                 : setAlert({
                     show: true,
-                    type: "Error",
+                    type: "error",
                     title: "Error",
                     message: `You don't have enough money in your balance`,
                     buttonLabel: "OK",
                   });
-        
         }
-
     },[movement])
     
     return (

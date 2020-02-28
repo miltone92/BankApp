@@ -12,7 +12,6 @@ import TextInputBorder from "../inputs/TextInputBorder";
  * 
 ********************/
 export const Form = (props) =>{
-    console.log(props.inputs)
 
     //Props
     const { title, inputs, callback, buttonTitle, selects} = props;
@@ -20,7 +19,6 @@ export const Form = (props) =>{
     const { register, handleSubmit, watch, errors } = useForm();
     
     let onSubmit = (data) =>{
-        console.log(data)
         callback(data);
     }
 
@@ -40,6 +38,7 @@ export const Form = (props) =>{
                 ))}
                     {selects !== undefined && selects.map((select) => (
                         <select 
+                            style={{maxWidth: "200px"}}
                             className="input-gray"
                             name={select.name}
                             ref={register}

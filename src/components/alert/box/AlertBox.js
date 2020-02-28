@@ -10,14 +10,25 @@ export const AlertBox = (props) =>{
 
 const { callback, title, message, buttonLabel, type } = props;
 
-  
+  let getAlertIcon = () =>{
+
+    switch(true){
+      case type === "success":
+        return <i class="far fa-check-circle"></i>
+      case type === "error":
+        return <i class="fas fa-exclamation-circle"></i>
+      default:
+        break;
+
+    }
+  }  
+
   return (
         <ContentContainer className="simple-container">
             <h1 className={`alert-box-${type}`}>{title}{" "}
-            
-            {
-              type === "success" && <i class="far fa-check-circle"></i>
-            }
+              {
+                getAlertIcon()
+              }
             </h1>
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <p>{message}</p>

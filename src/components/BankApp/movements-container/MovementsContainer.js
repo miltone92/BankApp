@@ -14,21 +14,18 @@ import benri from "../../../libs/benri"
  ********************/
 export const MovementsContainer = (props) =>{
 
-    // const [movements, setMovements] = (props.movement)
 
     useEffect(() =>{
 
         let testDate = [];
-        console.log("**************************")
         let sortedMovements = props.movements.sort(function(a,b){
             b = benri.getDateFromLocaleString(b.date)
             a = benri.getDateFromLocaleString(a.date)
-            console.log(b - a)
+    
             return b - a;
           });
-        
-        //   setMovements(sortedMovements);
-        console.log(sortedMovements);
+      
+
     }, [])
     
     return(

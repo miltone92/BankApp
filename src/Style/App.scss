@@ -2,6 +2,7 @@
 
 * {
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 html {
@@ -16,7 +17,7 @@ body {
   margin: 0;
   background-color: #ecf0f1;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  overflow-y: hidden;
+
 }
 
 textarea, select, input, button { outline: none; }

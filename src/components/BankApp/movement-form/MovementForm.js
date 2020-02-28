@@ -36,10 +36,22 @@ export const MovementForm = (props) => {
     const { register, handleSubmit, watch, errors } = useForm();
 
     let getDestination = async (data) => {
-        let response = await accountsAPI.get(`?number=${data.account}`);
-        response = response.data[0];
-        console.log(response);
-        setDestination(response)   
+
+        try{
+            let response = await accountsAPI.get(`?number=${data.account}`);
+            response = response.data[0];
+            setDestination(response)   
+        }
+        catch(e){
+            setAlert({
+                show: true,
+                type: "error",
+                title: "Error",
+                message: `The account does not exist.`,
+                buttonLabel: "OK",
+              });
+        }
+  
     }
 
     let onDestinationSubmit = (accountNumber) => {
@@ -62,7 +74,17 @@ export const MovementForm = (props) => {
    }
 
    let onAmountSubmit = (data) => {
-       defineMovementSchema(data);
+       data.amount >= 0 
+       ? defineMovementSchema(data)
+       : setAlert({
+        show: true,
+        type: "error",
+        title: "Error",
+        message: `Amount must be greater than zero`,
+        buttonLabel: "OK",
+      });
+
+
    }
 
    let postMovement = async () =>{
@@ -80,7 +102,7 @@ export const MovementForm = (props) => {
     sendEmail();
     props.callback();
     }else{
-        console.log("There was an error posting movement")
+        console.error("There was an error posting movement")
     }
    }
 
@@ -101,9 +123,9 @@ export const MovementForm = (props) => {
  
     emailjs.send(service_id, template_id, template_params, user_id)
     .then((result) => {
-         console.log(result.text);
+        
      }, (error) => {
-         console.log(error.text);
+         console.error(error.text);
      });
    }
 
@@ -114,7 +136,7 @@ export const MovementForm = (props) => {
             ? postMovement()
             : setAlert({
                 show: true,
-                type: "Error",
+                type: "error",
                 title: "Error",
                 message: `You don't have enough money in your balance`,
                 buttonLabel: "OK",

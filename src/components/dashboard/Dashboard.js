@@ -15,7 +15,7 @@ import PopOver from "../../components/buttons/PopOver/PopOver"
 import Accounts from "../../pages/accounts/Accounts"
 import AccountDetails from "../../pages/account-details/AccountDetails";
 import Statistics from "../../pages/statistics/Statistics"
-
+import Landing from "../../pages/landing/Landing"
 
 
 
@@ -44,14 +44,17 @@ export const Dashboard = () => {
             `Browser: ${log.browser} `,
             `Browser Version: ${log.browserVersion}`, 
             `Date: ${log.date} `,
-        ]}><i class="fas fa-broadcast-tower"></i></PopOver>
+        ]}><i className="fas fa-broadcast-tower"></i></PopOver>
 
         <SideNav>
           <NavLogo href="/">
-            GrowBank
+            growBank <i className="fas fa-seedling"></i>
           </NavLogo>
-          <NavLink href="/Accounts">
+          <NavLink href="/AccountsDebit">
           <i className="fas fa-piggy-bank side-nav__icon"></i> Accounts
+          </NavLink>
+          <NavLink href="/AccountsCredit">
+          <i className="fas fa-credit-card side-nav__icon"></i> Cedit Cards
           </NavLink>
           <NavLink href="/Statistics">
           <i className="fas fa-chart-pie side-nav__icon"></i> Statistics
@@ -61,10 +64,13 @@ export const Dashboard = () => {
         <MainContent>
           <Switch>
             <Route exact path="/">
-              <h1>Landing</h1>
+              <Landing></Landing>
             </Route>
-            <Route exact path="/Accounts">
-            <Accounts></Accounts>
+            <Route exact path="/AccountsDebit">
+              <Accounts accountType="debit"></Accounts>
+            </Route>
+            <Route exact path="/AccountsCredit">
+              <Accounts accountType="credit"></Accounts>
             </Route>
             <Route exact path="/UserProfile">
               <h1>Profile</h1>

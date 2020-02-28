@@ -115,7 +115,7 @@ let getOSandBrowser = () =>{
       matchItem: function (string, data) {
           var i = 0,
               j = 0,
-              html = '',
+              // html = '',
               regex,
               regexv,
               match,
@@ -152,8 +152,8 @@ let getOSandBrowser = () =>{
       }
   };
 
-  var e = module.init(),
-  debug = '';
+  var e = module.init();
+  // debug = '';
 
 /** 
   debug += 'os.name = ' + e.os.name + '\n';

@@ -7,8 +7,6 @@ export const SetUser = () => {
     const [state, setState] = useContext(UserContext);
   
     const setNewUser = newData => {
-      console.log("newData");
-      console.log(newData);
 
       setState(
         produce(state, draftState => {

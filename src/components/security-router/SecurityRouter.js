@@ -33,8 +33,7 @@ export const SecurityRouter = () =>{
     const [context] = useContext(UserContext);
 
     useEffect(() => {
-        console.log("!!!!!!!!!!!!!!!!!!!!!!");
-        console.log(context)
+
 
             setLog(context.user !== null)
        

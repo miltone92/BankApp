@@ -18,6 +18,7 @@ DONE:
 // pagos de servicios, agua, luz, telefono
 // graficos para reportes, gastos, ingresos
 // add min height to payments
+
 // separate forms  button and input  space between input and button
 // on transfer show full name
 // make headers smaller
@@ -29,3 +30,27 @@ DONE:
 
 
 
+QA: Functionality
+✔
+
+- Login✔
+- Create account debit
+-- movements ✔
+-- statistics ✔
+-- pay service ✔
+-- transfer ✔
+- Create account credit ✔
+-- movements ✔
+-- statistics ✔
+-- pay service ✔
+-- pay card ✔
+
+
+--View Statistics
+
+
+**
+// On Transfers: When an account that doesn't exist is entered, feedback should ve received ✔
+Maybe is shoul validate:
+No negative numbers on forms
+No paying card that has a debt of 0.

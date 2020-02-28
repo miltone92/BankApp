@@ -9,7 +9,7 @@ export class UserImage extends Component {
         const { callback } = this.props;
         return (
             <div className={`userImage`} onClick={callback}>
-                <i class="fas fa-user"></i>
+               <i className="fas fa-running"></i>
             </div>
         );
     }

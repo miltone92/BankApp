@@ -4,7 +4,6 @@ import "./Video.scss";
 export class VideoItem extends Component {
   render() {
     const { video, onVideoSelect } = this.props;
-    console.log(video);
     return (
       <div onClick={() => onVideoSelect(video)} className="video-list__item">
         <img

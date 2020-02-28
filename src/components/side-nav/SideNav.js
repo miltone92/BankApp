@@ -31,8 +31,7 @@ export const SideNav = (props) => {
       currentHref = currentHref.replace(/[^\w\s]/gi, '')
       currentHref = currentHref.replace(/\s/g, '');
 
-      // linkHref.replace(/\\|\//g, '');
-     // console.log(`Current link href ${linkHref} && current href ${currentHref}`);
+
       if (linkHref === currentHref) {
 
         link.classList += " link__active";

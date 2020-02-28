@@ -1,13 +1,9 @@
 import React, { useState, useEffect, } from "react";
 import {UserContext} from "../../contexts/UserContext";
 
-
-
 //API
 import movementDB from "../../api/movements";
 import accountsDB from "../../api/accounts";
-
-
 //Components
 import ContentContainer from "../../components/main-content/content-container/ContentContainer"
 import SectionHeader from "../../components/main-content/header-text/HeaderText";
@@ -17,6 +13,7 @@ import MovementForm from "../../components/BankApp/movement-form/MovementForm"
 import ActionNav from "../../components/BankApp/account-action-menu/AccountActionMenu"
 import PaymentsMenu from "../../components/BankApp/payment-menu/PaymentMenu"
 import StaticsMenu from "../../components/BankApp/statistics-menu/StatisticsMenu";
+import PayCard from "../../components/BankApp/pay-card/PayCard";
 
 
 export const AccountDetails = () => {
@@ -40,7 +37,6 @@ export const AccountDetails = () => {
         let account = await accountsDB.get(`?number=${accountNumber}`);
         account = account.data[0];
         setAccount(account)
-        console.log(account)
     }
 
     let toggleView = (view) =>{
@@ -58,16 +54,42 @@ export const AccountDetails = () => {
             <SectionHeader> Account Details</SectionHeader>
             {account !== null &&
             <AccountContainer
-                title={account.type.toUpperCase()}
+                title={account.name.toUpperCase()}
                 currency={account.currency}
                 number={account.accountNumber}
                 iban={account.iban}
                 balance={account.balance}
                 buttonLabel = {"Actions"}
                 showButton = {false}
+                type= {account.type}
+                creditLimit={account.creditLimit}
             ></AccountContainer> 
-            } 
-            <ActionNav
+            }
+            {account !== null && account.type === "debit"
+                ? <ActionNav
+                    callback={toggleView}
+                    redirects={[
+                        {
+                            title: "Movements",
+                            value: "movements",
+                        },
+                        {
+                            title: "Statistics",
+                            value: "statistics",
+                        },
+                        {
+                            title: "Transfers",
+                            value: "movementForm",
+                        },
+                        {
+                            title: "Payments",
+                            value: "payments",
+                        },
+
+                    ]}
+                    view = {view}
+                />
+                : <ActionNav
                 callback={toggleView}
                 redirects={[
                     {
@@ -79,18 +101,19 @@ export const AccountDetails = () => {
                         value: "statistics",
                     },
                     {
-                        title: "Transfers",
-                        value: "movementForm",
+                        title: "Services",
+                        value: "payments",
                     },
                     {
-                        title: "Payments",
-                        value: "payments",
+                        title: "Pay Card",
+                        value: "payCard",
                     },
 
                 ]}
                 view = {view}
-            >
-            </ActionNav>
+            />
+
+            }
 
             {/* Movements */}
             {movements !== null && view === "movements"
@@ -108,7 +131,15 @@ export const AccountDetails = () => {
                 ></MovementForm> 
             } 
 
-            {/* Payments */}
+            {/* Payments/Services */}
+            {   view === "payCard"
+                &&<PayCard
+                    account={account}
+                    callback={getAccountDetails}
+                ></PayCard> 
+            } 
+
+            {/* Pay Card */}
             {   view === "payments"
                 &&<PaymentsMenu
                     account={account}
@@ -124,8 +155,6 @@ export const AccountDetails = () => {
                 ></StaticsMenu> 
             }   
             
-       
-
           <br></br>
           <br></br>
         </ContentContainer>

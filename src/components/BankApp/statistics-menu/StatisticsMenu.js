@@ -16,8 +16,6 @@ export const StatisticMenu = (props) =>{
     useEffect(() =>{
 
     
-        console.log("*********** Statistics ************")
-
         let date = new Date();
         let firstDayOfTheMonth =  new Date(date.getFullYear(), date.getMonth(), 1);
         let lastDayOfTheMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -25,7 +23,7 @@ export const StatisticMenu = (props) =>{
             let date =  benri.getDateFromLocaleString(m.date)
             return (date >= firstDayOfTheMonth && date <= lastDayOfTheMonth);
         });
-        console.log(currentMonthMovements);
+     
 
         let currentMonthMovementsDates = []
         let currentMonthIncome = []

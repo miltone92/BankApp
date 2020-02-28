@@ -16,8 +16,9 @@ import benri from "../../libs/benri"
 
 
 
-export const Accounts = () =>{
+export const Accounts = (props) =>{
     const user = JSON.parse(sessionStorage.getItem("user"));
+    const {accountType} = props; 
 
     //state
     const [accounts, setAccounts] = useState({
@@ -27,18 +28,33 @@ export const Accounts = () =>{
     const [alert, setAlert] = useState({showAlert: false});
 
     let getAccountsData = async () =>{
-        let response = await accountsDB.get(`?owner=${user.email}`);
+      
+        let jws = user.jwt;
+        let response = await accountsDB.get(`?owner=${user.email}`, {
+          headers: {
+            jws: jws
+          }
+        });
         response = response.data;
 
-        let accountTypes = [];
-        let accountBalances = [];
+        //We must filter the response
+        //Depending on whether we need credit or debit
+        let accountsToUse = [];
         for (const a of response) {
-            accountTypes.push(a.type);
+            a.type === accountType && accountsToUse.push(a)
+        }
+
+        
+
+        let accountNames = [];
+        let accountBalances = [];
+        for (const a of accountsToUse) {
+            accountNames.push(a.name);
             accountBalances.push(a.balance)
         }
         setAccounts({
-            accounts: response,
-            accountTypes: accountTypes,
+            accounts: accountsToUse,
+            accountNames: accountNames,
             accountBalances: accountBalances
         })
     }
@@ -51,25 +67,43 @@ export const Accounts = () =>{
     let createAccount = async (data) =>{
        //Api call
 
+        let cardNumber = benri.getRandomNumberFromLimit(9999999999999999);
         let iban =  benri.getRandomNumberFromLimit(9999999999999999999);
         iban = `CR${iban}`
         let accountNumber = benri.getLastCharactersFromString(iban, 10)
-        let newAccount = {
-            balace: 0,
-            type: data.type,
-            accountNumber: accountNumber,
-            iban: iban,
-            currency: data.currency,
-            owner: user.email,
-            ownerName: user.username,
-        }
-        console.log(newAccount)
+        
+        let newAccount = {}
+
+            accountType === "debit"
+            ?   newAccount = {
+                balace: 0,
+                name: data.name,
+                type: "debit",
+                accountNumber: accountNumber,
+                iban: iban,
+                currency: data.currency,
+                owner: user.email,
+                ownerName: user.username,
+                creditLimit: 0,
+            }
+            :   newAccount = {
+                balance: 5000,
+                name: data.cardType,
+                type: "credit",
+                accountNumber: cardNumber,
+                iban: cardNumber,
+                currency: "USD",
+                owner: user.email,
+                ownerName: user.username,
+                creditLimit: 5000,
+            }
+        
         try{
             let response = await accountsDB.post("", newAccount);
-            response.status == 200 &&
+            response.status === 200 &&
                 setAlert({
                     showAlert: true,
-                    alertText: `${data.type} has been resgistered`,
+                    alertText: `Success`,
                     alertType: "success",
                     callback: removeAlert
                 });
@@ -78,7 +112,6 @@ export const Accounts = () =>{
             getAccountsData();
         }
         catch(e){
-            console.log(e)
             setAlert({
               showAlert: true,
               alertText: "Oops: Something went wrong!",
@@ -86,6 +119,7 @@ export const Accounts = () =>{
               callback: removeAlert
             });
             setModal("none");  
+            console.error(e);
         }
        
     }
@@ -94,7 +128,7 @@ export const Accounts = () =>{
         setModal("block");
         let modal = document.getElementById("modal")
         window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target === modal) {
               setModal("none")
             }
           }
@@ -102,33 +136,58 @@ export const Accounts = () =>{
 
     let getModalContent = () =>{
         //Modal will hold a container with a form
-        console.log("get modal content")
-        return (
-            <ContentContainer className="simple-container" style={{maxWidth: "250px", padding:"30px 5px"}}>
-                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <Form
-                        title = {"Create New Account"}
-                        inputs = {[
-                            {
-                                name: "type",
-                                placeholder: "Enter account name"
-                            },
-                           ]}
-                        selects = {[
-                            {
-                                name: "currency",
-                                options: ["USD", "CRC"]
-                                
-                            }
-                        ]}
-                        callback = {createAccount}
-                        buttonTitle = "Create account"
-                            >
-                    </Form> 
-                </div>
+        
+        if(accountType === "debit"){
+            return (
+                <ContentContainer className="simple-container" style={{maxWidth: "250px", padding:"30px 5px"}}>
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <Form
+                            title = {"Create New Account"}
+                            inputs = {[
+                                {
+                                    name: "name",
+                                    placeholder: "Enter account name"
+                                },
+                            ]}
+                            selects = {[
+                                {
+                                    name: "currency",
+                                    options: ["USD", "CRC"]
+                                    
+                                }
+                            ]}
+                            callback = {createAccount}
+                            buttonTitle = "Create account"
+                                >
+                        </Form> 
+                    </div>
 
-            </ContentContainer>
-        )
+                </ContentContainer>
+            )
+        }
+
+        if(accountType === "credit"){
+            return (
+                <ContentContainer className="simple-container" style={{maxWidth: "250px", padding:"30px 5px"}}>
+                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <Form
+                            title = {"Create New Card"}
+                            selects = {[
+                                {
+                                    name: "cardType",
+                                    options: ["VISA", "Mastercard", "AMEX"]
+                                    
+                                }
+                            ]}
+                            callback = {createAccount}
+                            buttonTitle = "Create card"
+                                >
+                        </Form> 
+                    </div>
+
+                </ContentContainer>
+            )
+        }
     }
 
     let removeAlert = () =>{
@@ -137,8 +196,6 @@ export const Accounts = () =>{
 
     //Did mount
     useEffect(() =>{
-        console.log(user)
-        // console.log(user.email)
         getAccountsData();
     }, [])
 
@@ -159,14 +216,19 @@ export const Accounts = () =>{
             </Modal>
 
             <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-            <SectionHeader>Accounts</SectionHeader>
+                {
+                    accountType === "debit"
+                    ?    <SectionHeader>Accounts</SectionHeader>
+                    :   <SectionHeader>Credit Cards</SectionHeader>
+                }
+              
                 <Button style={{margin: "0"}} className="circular-button" callback={useModal}><i class="fas fa-plus"></i></Button>
             </div>
                 <div >
                     {accounts.accounts.map(a => (
                         <AccountContainer
                         account={a}
-                        title={a.type.toUpperCase()}
+                        title={a.name}
                         currency={a.currency}
                         number={a.accountNumber}
                         iban={a.iban}
@@ -174,6 +236,8 @@ export const Accounts = () =>{
                         buttonLabel="Details"
                         callback={viewDetails}
                         callbackParams={a.accountNumber}
+                        type={a.type}
+                        creditLimit={a.creditLimit}
                         />
                         ))}
                 </div>

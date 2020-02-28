@@ -29,8 +29,7 @@ export const Login = () => {
     let now = new Date();
     now = now.toLocaleString('en-GB');
     let logInfo = benri.getOSandBrowser();
-    console.log("logInfo")
-    console.log(logInfo)
+
     let log = {
       user: user,
       os: logInfo.os,
@@ -52,7 +51,7 @@ export const Login = () => {
     //GET
     try{
       let response = await logApi.get(`?user=${user}`);
-      console.log(response)
+
       sessionStorage.setItem("log", JSON.stringify(response.data));
     }
     catch(e){
@@ -64,14 +63,13 @@ export const Login = () => {
 
     //POST
       let postResponse = await logApi.post(``, log);
-      console.log(postResponse)
+
 
      window.location.reload();
   }
 
   let signInSubmit = async (data) =>{
-    console.log("login")
-    console.log(data)
+
     try{
       let response = await usersApi.get(`?email=${data.email}&pw=${data.password}`);
       response = response.data[0];
@@ -83,7 +81,7 @@ export const Login = () => {
         }
     }
     catch(e){
-      console.log(e)
+
       setAlert({
         showAlert: true,
         alertText: "Oops: credentials are invalid!",
@@ -94,8 +92,7 @@ export const Login = () => {
   }
 
   let signUpSubmit = async (data) =>{
-    console.log("signup")
-    console.log(data)
+
 
     let user = {
       username: data.fullName,
@@ -104,7 +101,7 @@ export const Login = () => {
     }
 
     try{
-      console.log(user)
+
       let response = await usersApi.post("", user);
       response.status == 200
         &&       setAlert({
@@ -118,7 +115,6 @@ export const Login = () => {
       
     }
     catch(e){
-      console.log(e)
       setAlert({
         showAlert: true,
         alertText: "Ooops: User has already been registered!",

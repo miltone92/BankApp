@@ -14,12 +14,10 @@ export const UserList = () =>{
     let getUserData = async () =>{
         let response = await usersDB.get();
         response = response.data;
-        console.log(response)
     }
 
     useEffect(() =>{
 
-        console.log("works...")
         getUserData();
     }, [])
 

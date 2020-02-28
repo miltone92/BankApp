@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './style/App.scss';
+import './style/Fonts.scss'
 
 //Dependencies
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
@@ -22,21 +23,12 @@ function App() {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    
- 
-    console.log("************************")
-    console.log(benri.getOSandBrowser())
-
-    
-    
+        
     let loggedUser = sessionStorage.getItem("user");
-    console.log(loggedUser);
     if (loggedUser !== null) {
       setUser(true);
     }
   });
-
-  console.log(user);
 
   return (
     <Router>
