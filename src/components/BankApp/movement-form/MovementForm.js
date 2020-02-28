@@ -34,11 +34,18 @@ export const MovementForm = (props) => {
         });
     //Hook Formz`
     const { register, handleSubmit, watch, errors } = useForm();
+    //Sessions Storage
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    let jws = user.jwt;
 
     let getDestination = async (data) => {
 
         try{
-            let response = await accountsAPI.get(`?number=${data.account}`);
+            let response = await accountsAPI.get(`?number=${data.account}`, {
+                headers: {
+                  jws: jws
+                }
+              });
             response = response.data[0];
             setDestination(response)   
         }
@@ -69,7 +76,7 @@ export const MovementForm = (props) => {
             origin : props.account.accountNumber,
             destination : destination.accountNumber,
             amount : data.amount, 
-            currency : destination.currency,
+            currency : props.account.currency,
     })
    }
 
@@ -88,14 +95,19 @@ export const MovementForm = (props) => {
    }
 
    let postMovement = async () =>{
-    let response = await movementAPI.post(`?destination=${destination.accountNumber}`, movement);    
+    
+    let response = await movementAPI.post(`?destination=${destination.accountNumber}`, movement, {
+        headers: {
+          jws: jws
+        }
+      });    
     
     if (response.status == 200){
     setAlert({
         show: true,
         type: "success",
         title: "Success",
-        message: `The amount of ${movement.amount} ${movement.currency} has been transfered to: ${movement.destination}`,
+        message: `The amount of ${props.account.currency}  ${movement.amount}  has been transfered to: ${movement.destination}`,
         buttonLabel: "OK",
       });
    

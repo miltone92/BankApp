@@ -172,7 +172,7 @@ export const Login = () => {
             spellCheck="false" />
           
 
-            <a className="login__a" href="#">Forgot your password?</a>
+            {/* <a className="login__a" href="#">Forgot your password?</a> */}
             <button className="login__button">Sign In</button>
           </form>
         </div>
@@ -228,12 +228,12 @@ export const Login = () => {
           <div className="login__overlay--container">
             <div className="login__overlay">
               <div className="login__overlay--panel login__overlay--left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
+                <h1>Not new?</h1>
+                <p>Please login with your personal info</p>
                 <button type="submit" className=" login__button login__button--ghost" id="signIn">Sign In</button>
               </div>
               <div className="login__overlay--panel login__overlay--right">
-                <h1>Hello, Friend!</h1>
+                <h1>growBank <i class="fas fa-seedling"></i></h1>
                 <p>Enter your personal details and start journey with us</p>
                 <button  className="login__button login__button--ghost" id="signUp">Sign Up</button>
               </div>

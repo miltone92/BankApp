@@ -18,7 +18,8 @@ import benri from "../../../libs/benri"
 
 export const PaymentMenu = (props) =>{
 
-    const {balance} = props;
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    let jws = user.jwt;
     const [view, setView] = useState("Water");
     const [movement, setMovement] = useState(null);
     const [alert, setAlert] = useState({
@@ -43,7 +44,7 @@ export const PaymentMenu = (props) =>{
                 origin : props.account.accountNumber,
                 destination : "payment",
                 amount : data.amount, 
-                currency : "USD",
+                currency : props.account.currency,
 
         })
     }
@@ -143,14 +144,18 @@ export const PaymentMenu = (props) =>{
 
             let postMovement = async () =>{
      
-                await movementAPI.post(`?destination=${movement.origin}`, movement);
+                await movementAPI.post(`?destination=${movement.origin}`, movement, {
+                    headers: {
+                      jws: jws
+                    }
+                  });
         
         
                 setAlert({
                     show: true,
                     type: "success",
                     title: "Success",
-                    message: `The amount of ${movement.currency} ${movement.amount} has been payed. ${movement.detail}`,
+                    message: `The amount of  ${props.account.currency} ${movement.amount} has been payed. ${movement.detail}`,
                     buttonLabel: "OK",
                   });
         

@@ -75,7 +75,7 @@ export const Dashboard = () => {
         
          
           <NavLink href="#" style={{marginTop: "20px"}} className={""}>
-            <i class="fas fa-exchange-alt side-nav__icon"></i> {` 1 USD : 568 CRC`}
+            <i class="fas fa-exchange-alt side-nav__icon"></i> {` 1 USD : 569 CRC`}
           </NavLink>
         </SideNav>
 

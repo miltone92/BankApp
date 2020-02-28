@@ -21,6 +21,8 @@ export const AccountDetails = () => {
     const [movements, setMovements] = useState(null);
     const [account, setAccount] = useState(null);
     const [view, setView] = useState("movements");
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    let jws = user.jwt;
 
     let getUrlParam = (query) => {
         const queryString = window.location.search;
@@ -30,11 +32,19 @@ export const AccountDetails = () => {
 
     let getAccountDetails = async () =>{
         let accountNumber = getUrlParam("account")
-        let movements = await movementDB.get(`?destination=${accountNumber}`);
+        let movements = await movementDB.get(`?destination=${accountNumber}`, {
+            headers: {
+              jws: jws
+            }
+          });
         movements = movements.data;
         setMovements(movements);
 
-        let account = await accountsDB.get(`?number=${accountNumber}`);
+        let account = await accountsDB.get(`?number=${accountNumber}`, {
+            headers: {
+              jws: jws
+            }
+          });
         account = account.data[0];
         setAccount(account)
     }

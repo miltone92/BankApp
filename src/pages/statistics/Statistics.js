@@ -13,6 +13,7 @@ import ActionNav from "../../components/BankApp/account-action-menu/AccountActio
 
 export const Statistics = () =>{
     const user = JSON.parse(sessionStorage.getItem("user"));
+    let jws = user.jwt;
     const [data, setData] = useState(null);
     const [accounts, setAccounts] = useState({
         accounts: []
@@ -20,8 +21,13 @@ export const Statistics = () =>{
     const [view, setView] = useState("Doughnut");
     const [exchangeRate, setExchangeRate] = useState(null)
 
+
     let getAccountsData = async () =>{
-        let response = await accountsDB.get(`?owner=${user.email}`);
+        let response = await accountsDB.get(`?owner=${user.email}`, {
+            headers: {
+              jws: jws
+            }
+          });
         response = response.data;
 
         //We must filter the response
@@ -174,7 +180,7 @@ export const Statistics = () =>{
             <ContentContainer className="simple-container">
                 {data !== null &&
                     <div>
-                        <h1>Overall Balance</h1>
+                        <h1>Overall Balance (USD)</h1>
                         {getView()}
                     </div>
                 }

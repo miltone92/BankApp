@@ -18,6 +18,7 @@ import benri from "../../libs/benri"
 
 export const Accounts = (props) =>{
     const user = JSON.parse(sessionStorage.getItem("user"));
+    let jws = user.jwt;
     const {accountType} = props; 
 
     //state
@@ -29,7 +30,7 @@ export const Accounts = (props) =>{
 
     let getAccountsData = async () =>{
       
-        let jws = user.jwt;
+       
         let response = await accountsDB.get(`?owner=${user.email}`, {
           headers: {
             jws: jws
@@ -99,7 +100,11 @@ export const Accounts = (props) =>{
             }
         
         try{
-            let response = await accountsDB.post("", newAccount);
+            let response = await accountsDB.post("", newAccount, {
+                headers: {
+                  jws: jws
+                }
+              });
             response.status === 200 &&
                 setAlert({
                     showAlert: true,

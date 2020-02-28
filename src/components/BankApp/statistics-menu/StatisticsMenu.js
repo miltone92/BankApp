@@ -29,14 +29,19 @@ export const StatisticMenu = (props) =>{
         let currentMonthIncome = []
         let currentMonthExpenditure = []
         for (const movement of currentMonthMovements) {
+            if(movement.currency === "CRC"){
+                movement.amount = Math.round(movement.amount / 569);
+            }
             //Format date
             let date = benri.getDateFromLocaleString(movement.date)
             date.toLocaleString()
             //Set data
             currentMonthMovementsDates.push(movement.date)
-            props.account && movement.destination === props.account.accountNumber
-                ? currentMonthIncome.push(movement.amount) && currentMonthExpenditure.push(0)
-                : currentMonthExpenditure.push(movement.amount) && currentMonthIncome.push(0)
+            if(props.account && movement.destination === props.account.accountNumber){
+                currentMonthIncome.push(movement.amount) && currentMonthExpenditure.push(0)}
+                else{
+                currentMonthExpenditure.push(movement.amount) && currentMonthIncome.push(0)
+                }
         }
        setCurrentMonth({
            movements: currentMonthMovements,
